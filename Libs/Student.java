@@ -1,15 +1,23 @@
 package Libs;
 
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
-public class Student {
+import javax.imageio.ImageIO;
+
+public class Student implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private String MHS;
 
     private String TenHS;
 
     private float Diem;
 
-    private BufferedImage HinhAnh = null;
+    private transient BufferedImage HinhAnh = null;
 
     private String DiaChi;
 
@@ -73,5 +81,24 @@ public class Student {
 
     public void setDiaChi(String diaChi) {
         this.DiaChi = diaChi;
+    }
+
+    public void printInfo() {
+        System.out.println("Ma hoc sinh: " + MHS);
+        System.out.println("Ten hoc sinh: " + TenHS);
+        System.out.println("Diem: " + Diem);
+        System.out.println("Dia chi: " + DiaChi);
+        System.out.println("Ghi chu: " + GhiChu);
+    }
+
+    public void writeObject(ObjectOutputStream oos)
+            throws IOException {
+        oos.defaultWriteObject();
+        ImageIO.write(HinhAnh, "png", oos);
+    }
+
+    public void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        ImageIO.read(in);
     }
 }
