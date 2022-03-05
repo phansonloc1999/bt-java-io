@@ -69,6 +69,7 @@ public class MyProgram {
                 System.out.println("Diem: " + students.get(i).getDiem());
                 System.out.println("Dia chi: " + students.get(i).getDiaChi());
                 System.out.println("Ghi chu: " + students.get(i).getGhiChu());
+                scanner.close();
                 break;
             }
         }
@@ -91,6 +92,20 @@ public class MyProgram {
         modifiedStudent.setGhiChu(scanner.nextLine());
 
         students.set(i, modifiedStudent);
+        scanner.close();
+    }
+
+    private static void removeStudent(ArrayList<Student> students) {
+        System.out.print("Nhap ma hoc sinh muon xoa: ");
+        Scanner scanner = new Scanner(System.in);
+        String maHocSinh = scanner.nextLine();
+        for (int i = 0; i < students.size(); i++) {
+            if (students.get(i).getMHS().equals(maHocSinh)) {
+                students.remove(i);
+                break;
+            }
+        }
+        scanner.close();
     }
 
     public static void main(String[] args) throws Exception {
@@ -99,8 +114,9 @@ public class MyProgram {
 
         // addStudent(students);
 
-        modifyStudent(students);
+        // modifyStudent(students);
 
+        removeStudent(students);
         outputToFile(students);
     }
 }
