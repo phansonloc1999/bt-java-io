@@ -1,6 +1,7 @@
 import javax.imageio.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import Libs.Student;
 
@@ -34,43 +35,33 @@ public class MyProgram {
         return students;
     }
 
-    public static void main(String[] args) throws Exception {
+    private static void addStudent(ArrayList<Student> students) throws IOException {
         Student student = new Student();
-        student.setMHS("1712571");
-        student.setTenHS("Phan Son Loc");
-        student.setDiem(10);
-        File f = new File("image.png");
-        try {
-            student.setHinhAnh(ImageIO.read(f));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        student.setDiaChi("09 Ba Trieu, thi tran Quang Phu, huyen Cum'gar, tinh Daklak, Viet Nam");
-        student.setGhiChu("");
-
-        Student student1 = new Student();
-        student1.setMHS("1712570");
-        student1.setTenHS("Nguyen Manh Linh");
-        student1.setDiem(10);
-        File f1 = new File("image1.png");
-        try {
-            student1.setHinhAnh(ImageIO.read(f1));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        student1.setDiaChi("10 Ba Trieu, thi tran Quang Phu, huyen Cum'gar, tinh Daklak, Viet Nam");
-        student1.setGhiChu("");
-
-        ArrayList<Student> students = new ArrayList<Student>();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ma hoc sinh: ");
+        student.setMHS(scanner.nextLine());
+        System.out.print("Ten hoc sinh: ");
+        student.setTenHS(scanner.nextLine());
+        System.out.print("Diem: ");
+        student.setDiem(scanner.nextFloat());
+        scanner.nextLine();
+        System.out.print("Duong dan tuyet doi den hinh anh: ");
+        String path = scanner.nextLine();
+        student.setHinhAnh(ImageIO.read(new File(path)));
+        System.out.print("Dia chi: ");
+        student.setDiaChi(scanner.nextLine());
+        System.out.print("Ghi chu: ");
+        student.setGhiChu(scanner.nextLine());
+        scanner.close();
         students.add(student);
-        students.add(student1);
-        outputToFile(students);
+    }
 
-        students.clear();
+    public static void main(String[] args) throws Exception {
+        ArrayList<Student> students = new ArrayList<Student>();
         students = inputFromFile();
 
-        ImageIO.write(students.get(0).getHinhAnh(), "png", new File("out.png"));
-        ImageIO.write(students.get(1).getHinhAnh(), "png", new File("out1.png"));
-        return;
+        addStudent(students);
+
+        outputToFile(students);
     }
 }
