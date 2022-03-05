@@ -56,11 +56,50 @@ public class MyProgram {
         students.add(student);
     }
 
+    private static void modifyStudent(ArrayList<Student> students) throws IOException {
+        System.out.print("Nhap Ma hoc sinh can chinh sua: ");
+        Scanner scanner = new Scanner(System.in);
+        String maHocSinh = scanner.nextLine();
+        int i;
+        for (i = 0; i < students.size(); i++) {
+            if (students.get(i).getMHS().equals(maHocSinh)) {
+                System.out.println("THONG TIN HOC SINH");
+                System.out.println("Ma hoc sinh: " + students.get(i).getMHS());
+                System.out.println("Ten hoc sinh: " + students.get(i).getTenHS());
+                System.out.println("Diem: " + students.get(i).getDiem());
+                System.out.println("Dia chi: " + students.get(i).getDiaChi());
+                System.out.println("Ghi chu: " + students.get(i).getGhiChu());
+                break;
+            }
+        }
+
+        Student modifiedStudent = new Student();
+        System.out.println("NHAP THONG TIN HOC SINH CAN CHINH SUA");
+        System.out.print("Ma hoc sinh: ");
+        modifiedStudent.setMHS(scanner.nextLine());
+        System.out.print("Ten hoc sinh: ");
+        modifiedStudent.setTenHS(scanner.nextLine());
+        System.out.print("Diem: ");
+        modifiedStudent.setDiem(scanner.nextFloat());
+        scanner.nextLine();
+        System.out.print("Duong dan tuyet doi den hinh anh: ");
+        String path = scanner.nextLine();
+        modifiedStudent.setHinhAnh(ImageIO.read(new File(path)));
+        System.out.print("Dia chi: ");
+        modifiedStudent.setDiaChi(scanner.nextLine());
+        System.out.print("Ghi chu: ");
+        modifiedStudent.setGhiChu(scanner.nextLine());
+
+        students.set(i, modifiedStudent);
+    }
+
     public static void main(String[] args) throws Exception {
         ArrayList<Student> students = new ArrayList<Student>();
         students = inputFromFile();
 
-        addStudent(students);
+        // addStudent(students);
+
+        modifyStudent(students);
 
         outputToFile(students);
     }
