@@ -46,8 +46,13 @@ public class MyProgram {
         student.setDiem(scanner.nextFloat());
         scanner.nextLine();
         System.out.print("Duong dan tuyet doi den hinh anh: ");
-        String path = scanner.nextLine();
-        student.setHinhAnh(ImageIO.read(new File(path)));
+        String path = "";
+        path = scanner.nextLine();
+        if (path.equals("")) {
+            student.setHinhAnh(null);
+        } else {
+            student.setHinhAnh(ImageIO.read(new File(path)));
+        }
         System.out.print("Dia chi: ");
         student.setDiaChi(scanner.nextLine());
         System.out.print("Ghi chu: ");
@@ -57,10 +62,16 @@ public class MyProgram {
     }
 
     private static void modifyStudent(ArrayList<Student> students) throws IOException {
-        System.out.print("Nhap Ma hoc sinh can chinh sua: ");
+        System.out.print("Nhap ma hoc sinh can chinh sua: ");
         Scanner scanner = new Scanner(System.in);
         String maHocSinh = scanner.nextLine();
         int i;
+        if (students.size() == 0) {
+            System.out.println("Khong co hoc sinh nao trong danh sach!");
+            scanner.close();
+            return;
+        }
+
         for (i = 0; i < students.size(); i++) {
             if (students.get(i).getMHS().equals(maHocSinh)) {
                 System.out.println("THONG TIN HOC SINH");
@@ -71,6 +82,11 @@ public class MyProgram {
                 System.out.println("Ghi chu: " + students.get(i).getGhiChu());
                 scanner.close();
                 break;
+            }
+            if (i >= students.size() - 1) {
+                System.out.println("Khong tim thay hoc sinh voi ma da nhap!");
+                scanner.close();
+                return;
             }
         }
 
@@ -102,21 +118,37 @@ public class MyProgram {
         for (int i = 0; i < students.size(); i++) {
             if (students.get(i).getMHS().equals(maHocSinh)) {
                 students.remove(i);
-                break;
+                scanner.close();
+                return;
             }
         }
+        System.out.println("Khong tim thay hoc sinh voi ma da nhap!");
         scanner.close();
+    }
+
+    private static void listStudents(ArrayList<Student> students) {
+        for (int i = 0; i < students.size(); i++) {
+            System.out.println("THONG TIN HOC SINH");
+            System.out.println("Ma hoc sinh: " + students.get(i).getMHS());
+            System.out.println("Ten hoc sinh: " + students.get(i).getTenHS());
+            System.out.println("Diem: " + students.get(i).getDiem());
+            System.out.println("Dia chi: " + students.get(i).getDiaChi());
+            System.out.println("Ghi chu: " + students.get(i).getGhiChu());
+        }
     }
 
     public static void main(String[] args) throws Exception {
         ArrayList<Student> students = new ArrayList<Student>();
         students = inputFromFile();
 
-        // addStudent(students);
+        addStudent(students);
 
         // modifyStudent(students);
 
-        removeStudent(students);
+        // removeStudent(students);
+
+        listStudents(students);
+
         outputToFile(students);
     }
 }

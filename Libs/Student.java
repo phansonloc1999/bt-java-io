@@ -94,11 +94,17 @@ public class Student implements Serializable {
     private void writeObject(ObjectOutputStream oos)
             throws IOException {
         oos.defaultWriteObject();
-        ImageIO.write(HinhAnh, "png", oos);
+        if (HinhAnh != null)
+            ImageIO.write(HinhAnh, "png", oos);
     }
 
-    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
-        in.defaultReadObject();
-        HinhAnh = ImageIO.read(in);
+    private void readObject(ObjectInputStream in) {
+        try {
+            in.defaultReadObject();
+            HinhAnh = ImageIO.read(in);
+        } catch (IOException e) {
+        } catch (ClassNotFoundException e) {
+
+        }
     }
 }
