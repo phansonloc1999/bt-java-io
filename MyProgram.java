@@ -36,6 +36,7 @@ public class MyProgram {
     }
 
     private static void addStudent(ArrayList<Student> students) throws IOException {
+        System.out.println("==================THEM HOC SINH==================");
         Student student = new Student();
         Scanner scanner = new Scanner(System.in);
         System.out.print("Ma hoc sinh: ");
@@ -62,6 +63,7 @@ public class MyProgram {
     }
 
     private static void modifyStudent(ArrayList<Student> students) throws IOException {
+        System.out.println("==================CHINH SUA HOC SINH==================");
         System.out.print("Nhap ma hoc sinh can chinh sua: ");
         Scanner scanner = new Scanner(System.in);
         String maHocSinh = scanner.nextLine();
@@ -74,7 +76,7 @@ public class MyProgram {
 
         for (i = 0; i < students.size(); i++) {
             if (students.get(i).getMHS().equals(maHocSinh)) {
-                System.out.println("THONG TIN HOC SINH");
+                System.out.println("==================THONG TIN HOC SINH DA NHAP==================");
                 System.out.println("Ma hoc sinh: " + students.get(i).getMHS());
                 System.out.println("Ten hoc sinh: " + students.get(i).getTenHS());
                 System.out.println("Diem: " + students.get(i).getDiem());
@@ -91,7 +93,7 @@ public class MyProgram {
         }
 
         Student modifiedStudent = new Student();
-        System.out.println("NHAP THONG TIN HOC SINH CAN CHINH SUA");
+        System.out.println("==================NHAP THONG TIN HOC SINH CAN CHINH SUA==================");
         System.out.print("Ma hoc sinh: ");
         modifiedStudent.setMHS(scanner.nextLine());
         System.out.print("Ten hoc sinh: ");
@@ -117,6 +119,7 @@ public class MyProgram {
     }
 
     private static void removeStudent(ArrayList<Student> students) {
+        System.out.println("==================XOA HOC SINH==================");
         System.out.print("Nhap ma hoc sinh muon xoa: ");
         Scanner scanner = new Scanner(System.in);
         String maHocSinh = scanner.nextLine();
@@ -133,7 +136,7 @@ public class MyProgram {
 
     private static void listStudents(ArrayList<Student> students) {
         for (int i = 0; i < students.size(); i++) {
-            System.out.println("THONG TIN HOC SINH");
+            System.out.println("==================LIET KE THONG TIN HOC SINH==================");
             System.out.println("Ma hoc sinh: " + students.get(i).getMHS());
             System.out.println("Ten hoc sinh: " + students.get(i).getTenHS());
             System.out.println("Diem: " + students.get(i).getDiem());
@@ -145,6 +148,8 @@ public class MyProgram {
     public static void main(String[] args) throws Exception {
         ArrayList<Student> students = new ArrayList<Student>();
         students = inputFromFile();
+
+        listStudents(students);
 
         addStudent(students);
 
