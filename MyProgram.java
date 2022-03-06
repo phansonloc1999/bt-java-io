@@ -57,7 +57,7 @@ public class MyProgram {
         student.setDiaChi(scanner.nextLine());
         System.out.print("Ghi chu: ");
         student.setGhiChu(scanner.nextLine());
-        scanner.close();
+        //
         students.add(student);
     }
 
@@ -68,7 +68,7 @@ public class MyProgram {
         int i;
         if (students.size() == 0) {
             System.out.println("Khong co hoc sinh nao trong danh sach!");
-            scanner.close();
+
             return;
         }
 
@@ -80,12 +80,12 @@ public class MyProgram {
                 System.out.println("Diem: " + students.get(i).getDiem());
                 System.out.println("Dia chi: " + students.get(i).getDiaChi());
                 System.out.println("Ghi chu: " + students.get(i).getGhiChu());
-                scanner.close();
+
                 break;
             }
             if (i >= students.size() - 1) {
                 System.out.println("Khong tim thay hoc sinh voi ma da nhap!");
-                scanner.close();
+                //
                 return;
             }
         }
@@ -100,15 +100,20 @@ public class MyProgram {
         modifiedStudent.setDiem(scanner.nextFloat());
         scanner.nextLine();
         System.out.print("Duong dan tuyet doi den hinh anh: ");
-        String path = scanner.nextLine();
-        modifiedStudent.setHinhAnh(ImageIO.read(new File(path)));
+        String path = "";
+        path = scanner.nextLine();
+        if (path.equals("")) {
+            modifiedStudent.setHinhAnh(null);
+        } else {
+            modifiedStudent.setHinhAnh(ImageIO.read(new File(path)));
+        }
         System.out.print("Dia chi: ");
         modifiedStudent.setDiaChi(scanner.nextLine());
         System.out.print("Ghi chu: ");
         modifiedStudent.setGhiChu(scanner.nextLine());
 
         students.set(i, modifiedStudent);
-        scanner.close();
+
     }
 
     private static void removeStudent(ArrayList<Student> students) {
@@ -118,12 +123,12 @@ public class MyProgram {
         for (int i = 0; i < students.size(); i++) {
             if (students.get(i).getMHS().equals(maHocSinh)) {
                 students.remove(i);
-                scanner.close();
+
                 return;
             }
         }
         System.out.println("Khong tim thay hoc sinh voi ma da nhap!");
-        scanner.close();
+
     }
 
     private static void listStudents(ArrayList<Student> students) {
@@ -143,9 +148,9 @@ public class MyProgram {
 
         addStudent(students);
 
-        // modifyStudent(students);
+        modifyStudent(students);
 
-        // removeStudent(students);
+        removeStudent(students);
 
         listStudents(students);
 
