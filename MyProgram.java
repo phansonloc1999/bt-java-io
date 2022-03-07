@@ -1,6 +1,7 @@
 import javax.imageio.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import Libs.Student;
@@ -145,20 +146,60 @@ public class MyProgram {
         }
     }
 
+    private static ArrayList<Student> sortAscendingMaHS(ArrayList<Student> students) {
+        int i, j;
+        for (i = 0; i < students.size() - 1; i++) {
+            for (j = 0; j < students.size() - i - 1; j++) {
+                Long a = Long.parseLong(students.get(j).getMHS());
+                Long b = Long.parseLong(students.get(j + 1).getMHS());
+                if (a > b) {
+                    Student temp = students.get(j);
+                    students.set(j, students.get(j + 1));
+                    students.set(j + 1, temp);
+                }
+            }
+        }
+        return students;
+    }
+
+    private static ArrayList<Student> sortDescendingMaHS(ArrayList<Student> students) {
+        int i, j;
+        for (i = 0; i < students.size() - 1; i++) {
+            for (j = 0; j < students.size() - i - 1; j++) {
+                Long student1 = Long.parseLong(students.get(j).getMHS());
+                Long student2 = Long.parseLong(students.get(j + 1).getMHS());
+                if (student1 < student2) {
+                    Student temp = students.get(j);
+                    students.set(j, students.get(j + 1));
+                    students.set(j + 1, temp);
+                }
+            }
+        }
+        return students;
+    }
+
     public static void main(String[] args) throws Exception {
         ArrayList<Student> students = new ArrayList<Student>();
         students = inputFromFile();
 
+        sortAscendingMaHS(students);
+
+        // listStudents(students);
+
+        // addStudent(students);
+
+        // addStudent(students);
+
+        // addStudent(students);
+
+        // addStudent(students);
+
+        // modifyStudent(students);
+
+        // removeStudent(students);
+
         listStudents(students);
 
-        addStudent(students);
-
-        modifyStudent(students);
-
-        removeStudent(students);
-
-        listStudents(students);
-
-        outputToFile(students);
+        // outputToFile(students);
     }
 }
