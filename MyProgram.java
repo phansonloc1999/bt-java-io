@@ -246,6 +246,35 @@ public class MyProgram {
         return students;
     }
 
+    private static ArrayList<Student> importFromCSV(ArrayList<Student> students) {
+        try {
+            students.clear();
+            Scanner scanner = new Scanner(new File("Data/output.csv"));
+            scanner.nextLine(); // Read first line containing column names
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if (line.equals(""))
+                    continue;
+
+                String[] tokens = line.split(",", -1);
+                Student student = new Student();
+
+                student.setMHS(tokens[0]);
+                student.setTenHS(tokens[1]);
+                student.setDiem(Float.parseFloat(tokens[2]));
+                student.setDiaChi(tokens[3]);
+                student.setGhiChu(tokens[4]);
+
+                students.add(student);
+            }
+            return students;
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     private static void outputToCSV(ArrayList<Student> students) {
         try {
             BufferedWriter bWriter = new BufferedWriter(new FileWriter("Data/output.csv"));
@@ -262,8 +291,8 @@ public class MyProgram {
     }
 
     public static void main(String[] args) throws Exception {
-        ArrayList<Student> students = new ArrayList<Student>();
-        students = inputFromFile();
+        ArrayList<Student> students = new ArrayList<>();
+        students = importFromCSV(students);
 
         listStudents(students);
 
