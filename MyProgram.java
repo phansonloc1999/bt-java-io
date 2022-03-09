@@ -136,13 +136,48 @@ public class MyProgram {
     }
 
     private static void listStudents(ArrayList<Student> students) {
+        System.out.println("==================LIET KE THONG TIN HOC SINH==================");
+        System.out.println("1. Ma hoc sinh tang dan");
+        System.out.println("2. Ma hoc sinh giam dan");
+        System.out.println("3. Diem tang dan");
+        System.out.println("4. Diem giam dan");
+        System.out.println("-1. Thoat");
+        System.out.print("Nhap lua chon cua ban (bang so): ");
+        Scanner scanner = new Scanner(System.in);
+        int option = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (option) {
+            case -1:
+                return;
+
+            case 1:
+                sortAscendingMaHS(students);
+                break;
+
+            case 2:
+                sortDescendingMaHS(students);
+                break;
+
+            case 3:
+                sortAscendingDiem(students);
+                break;
+
+            case 4:
+                sortDescendingDiem(students);
+                break;
+
+            default:
+                break;
+        }
+
         for (int i = 0; i < students.size(); i++) {
-            System.out.println("==================LIET KE THONG TIN HOC SINH==================");
             System.out.println("Ma hoc sinh: " + students.get(i).getMHS());
             System.out.println("Ten hoc sinh: " + students.get(i).getTenHS());
             System.out.println("Diem: " + students.get(i).getDiem());
             System.out.println("Dia chi: " + students.get(i).getDiaChi());
             System.out.println("Ghi chu: " + students.get(i).getGhiChu());
+            System.out.println();
         }
     }
 
