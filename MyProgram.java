@@ -150,9 +150,9 @@ public class MyProgram {
         int i, j;
         for (i = 0; i < students.size() - 1; i++) {
             for (j = 0; j < students.size() - i - 1; j++) {
-                Long a = Long.parseLong(students.get(j).getMHS());
-                Long b = Long.parseLong(students.get(j + 1).getMHS());
-                if (a > b) {
+                Long student1 = Long.parseLong(students.get(j).getMHS());
+                Long student2 = Long.parseLong(students.get(j + 1).getMHS());
+                if (student1 > student2) {
                     Student temp = students.get(j);
                     students.set(j, students.get(j + 1));
                     students.set(j + 1, temp);
@@ -178,28 +178,42 @@ public class MyProgram {
         return students;
     }
 
+    private static ArrayList<Student> sortAscendingDiem(ArrayList<Student> students) {
+        int i, j;
+        for (i = 0; i < students.size() - 1; i++) {
+            for (j = 0; j < students.size() - i - 1; j++) {
+                Float student1 = students.get(j).getDiem();
+                Float student2 = students.get(j + 1).getDiem();
+                if (student1 > student2) {
+                    Student temp = students.get(j);
+                    students.set(j, students.get(j + 1));
+                    students.set(j + 1, temp);
+                }
+            }
+        }
+        return students;
+    }
+
+    private static ArrayList<Student> sortDescendingDiem(ArrayList<Student> students) {
+        int i, j;
+        for (i = 0; i < students.size() - 1; i++) {
+            for (j = 0; j < students.size() - i - 1; j++) {
+                Float student1 = students.get(j).getDiem();
+                Float student2 = students.get(j + 1).getDiem();
+                if (student1 < student2) {
+                    Student temp = students.get(j);
+                    students.set(j, students.get(j + 1));
+                    students.set(j + 1, temp);
+                }
+            }
+        }
+        return students;
+    }
+
     public static void main(String[] args) throws Exception {
         ArrayList<Student> students = new ArrayList<Student>();
         students = inputFromFile();
 
-        sortAscendingMaHS(students);
-
-        // listStudents(students);
-
-        // addStudent(students);
-
-        // addStudent(students);
-
-        // addStudent(students);
-
-        // addStudent(students);
-
-        // modifyStudent(students);
-
-        // removeStudent(students);
-
         listStudents(students);
-
-        // outputToFile(students);
     }
 }
