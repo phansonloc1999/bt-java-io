@@ -1,5 +1,6 @@
 import javax.imageio.*;
 import java.io.*;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -8,7 +9,7 @@ import Libs.Student;
 
 public class MyProgram {
     private static void outputToFile(ArrayList<Student> students) throws IOException {
-        FileOutputStream fos = new FileOutputStream("students.bin");
+        FileOutputStream fos = new FileOutputStream("Data/students.bin");
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeInt(students.size());
         for (int i = 0; i < students.size(); i++) {
@@ -20,7 +21,7 @@ public class MyProgram {
     }
 
     private static ArrayList<Student> inputFromFile() throws IOException {
-        FileInputStream fis = new FileInputStream("students.bin");
+        FileInputStream fis = new FileInputStream("Data/students.bin");
         ObjectInput ois = new ObjectInputStream(fis);
         int num = ois.readInt();
         ArrayList<Student> students = new ArrayList<Student>();
@@ -245,10 +246,27 @@ public class MyProgram {
         return students;
     }
 
+    private static void outputToCSV(ArrayList<Student> students) {
+        try {
+            BufferedWriter bWriter = new BufferedWriter(new FileWriter("Data/output.csv"));
+            bWriter.write("MHS,TenHS,Diem,DiaChi,GhiChu\n");
+            for (int i = 0; i < students.size(); i++) {
+                Student std = students.get(i);
+                bWriter.write(std.getMHS() + "," + std.getTenHS() + "," + std.getDiem() + "," + std.getDiaChi() + ","
+                        + std.getGhiChu() + "\n");
+            }
+            bWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) throws Exception {
         ArrayList<Student> students = new ArrayList<Student>();
         students = inputFromFile();
 
         listStudents(students);
+
+        outputToCSV(students);
     }
 }
