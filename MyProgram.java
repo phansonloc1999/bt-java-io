@@ -8,7 +8,7 @@ import java.util.Scanner;
 import Libs.Student;
 
 public class MyProgram {
-    private static void outputToFile(ArrayList<Student> students) throws IOException {
+    private static void outputToBinFile(ArrayList<Student> students) throws IOException {
         FileOutputStream fos = new FileOutputStream("Data/students.bin");
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeInt(students.size());
@@ -20,7 +20,7 @@ public class MyProgram {
         fos.close();
     }
 
-    private static ArrayList<Student> inputFromFile() throws IOException {
+    private static ArrayList<Student> inputFromBinFile() throws IOException {
         FileInputStream fis = new FileInputStream("Data/students.bin");
         ObjectInput ois = new ObjectInputStream(fis);
         int num = ois.readInt();
@@ -275,7 +275,7 @@ public class MyProgram {
         return null;
     }
 
-    private static void outputToCSV(ArrayList<Student> students) {
+    private static void exportToCSV(ArrayList<Student> students) {
         try {
             BufferedWriter bWriter = new BufferedWriter(new FileWriter("Data/output.csv"));
             bWriter.write("MHS,TenHS,Diem,DiaChi,GhiChu\n");
@@ -323,19 +323,19 @@ public class MyProgram {
                     listStudents(students);
                     break;
                 case 5:
-                    students = inputFromFile();
+                    students = inputFromBinFile();
                     break;
                 case 6:
-                    outputToFile(students);
+                    outputToBinFile(students);
                     break;
                 case 7:
                     importFromCSV(students);
                     break;
                 case 8:
-                    outputToCSV(students);
+                    exportToCSV(students);
                     break;
                 case -1:
-                    System.out.println("GOOD BYE!");
+                    System.out.println("GOODBYE!");
                     return;
                 default:
                     break;
