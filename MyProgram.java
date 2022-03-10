@@ -290,12 +290,60 @@ public class MyProgram {
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    private static void showMenu() throws IOException {
+        int option;
         ArrayList<Student> students = new ArrayList<>();
-        students = importFromCSV(students);
+        do {
+            System.out.println("==================MENU CHINH==================");
+            System.out.println("1. Them hoc sinh");
+            System.out.println("2. Cap nhat thong tin hoc sinh");
+            System.out.println("3. Xoa hoc sinh");
+            System.out.println("4. Liet ke danh sach hoc sinh");
+            System.out.println("5. Load danh sach tu file nhi phan (Data/students.bin)");
+            System.out.println("6. Ghi danh sach ra file nhi phan (Data/students.bin)");
+            System.out.println("7. Import danh sach tu file csv (Data/output.csv)");
+            System.out.println("8. Export danh sach ra file csv (Data/output.csv)");
+            System.out.println("-1. Thoat");
+            System.out.print("Nhap lua chon cua ban (bang chu so): ");
+            Scanner scanner = new Scanner(System.in);
+            option = scanner.nextInt();
+            scanner.nextLine();
 
-        listStudents(students);
+            switch (option) {
+                case 1:
+                    addStudent(students);
+                    break;
+                case 2:
+                    modifyStudent(students);
+                    break;
+                case 3:
+                    removeStudent(students);
+                    break;
+                case 4:
+                    listStudents(students);
+                    break;
+                case 5:
+                    students = inputFromFile();
+                    break;
+                case 6:
+                    outputToFile(students);
+                    break;
+                case 7:
+                    importFromCSV(students);
+                    break;
+                case 8:
+                    outputToCSV(students);
+                    break;
+                case -1:
+                    System.out.println("GOOD BYE!");
+                    return;
+                default:
+                    break;
+            }
+        } while (option != -1);
+    }
 
-        outputToCSV(students);
+    public static void main(String[] args) throws Exception {
+        showMenu();
     }
 }
