@@ -1,8 +1,6 @@
 import javax.imageio.*;
 import java.io.*;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 import Libs.Student;
