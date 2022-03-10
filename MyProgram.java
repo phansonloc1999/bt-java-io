@@ -71,7 +71,7 @@ public class MyProgram {
         String maHocSinh = scanner.nextLine();
         int i;
         if (students.size() == 0) {
-            System.out.println("Khong co hoc sinh nao trong danh sach!");
+            System.out.println("Khong co hoc sinh nao trong danh sach!\n");
 
             return;
         }
@@ -89,7 +89,8 @@ public class MyProgram {
             }
             if (i >= students.size() - 1) {
                 System.out.println("Khong tim thay hoc sinh voi ma da nhap!");
-                //
+                System.out.println("Bam bat ky phim nao de tiep tuc...");
+                scanner.nextLine();
                 return;
             }
         }
@@ -132,7 +133,7 @@ public class MyProgram {
                 return;
             }
         }
-        System.out.println("Khong tim thay hoc sinh voi ma da nhap!");
+        System.out.println("Khong tim thay hoc sinh voi ma da nhap!\n");
 
     }
 
@@ -180,6 +181,9 @@ public class MyProgram {
             System.out.println("Ghi chu: " + students.get(i).getGhiChu());
             System.out.println();
         }
+
+        System.out.print("Bam bat ky phim nao de tiep tuc...");
+        scanner.nextLine();
     }
 
     private static ArrayList<Student> sortAscendingMaHS(ArrayList<Student> students) {
