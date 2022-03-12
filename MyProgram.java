@@ -70,7 +70,8 @@ public class MyProgram {
         int i;
         if (students.size() == 0) {
             System.out.println("Khong co hoc sinh nao trong danh sach!\n");
-
+            System.out.println("Bam bat ky phim nao de tiep tuc...");
+            scanner.nextLine();
             return;
         }
 
@@ -82,7 +83,6 @@ public class MyProgram {
                 System.out.println("Diem: " + students.get(i).getDiem());
                 System.out.println("Dia chi: " + students.get(i).getDiaChi());
                 System.out.println("Ghi chu: " + students.get(i).getGhiChu());
-
                 break;
             }
             if (i >= students.size() - 1) {
@@ -132,7 +132,8 @@ public class MyProgram {
             }
         }
         System.out.println("Khong tim thay hoc sinh voi ma da nhap!\n");
-
+        System.out.println("Bam bat ky phim nao de tiep tuc...");
+        scanner.nextLine();
     }
 
     private static void listStudents(ArrayList<Student> students) {
@@ -179,7 +180,6 @@ public class MyProgram {
             System.out.println("Ghi chu: " + students.get(i).getGhiChu());
             System.out.println();
         }
-
         System.out.print("Bam bat ky phim nao de tiep tuc...");
         scanner.nextLine();
     }
